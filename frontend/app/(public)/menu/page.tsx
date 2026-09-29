@@ -5,8 +5,9 @@ import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { fetchCategories, fetchMenuItems } from '@/lib/api';
 import { MenuItem, MenuCategory } from '@/types';
-import { Search, Flame, Filter, Utensils, X, Clock, AlertTriangle, CheckCircle } from 'lucide-react';
+import { Search, Flame, Filter, Utensils, X, Clock, AlertTriangle, CheckCircle, Calendar, Users } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function MenuPage() {
   const [categories, setCategories] = useState<MenuCategory[]>([]);
@@ -67,10 +68,10 @@ export default function MenuPage() {
       {/* Header Title Section */}
       <section className="py-12 px-4 bg-gradient-to-b from-mayukha-surface to-mayukha-dark border-b border-mayukha-border/40 text-center">
         <div className="max-w-4xl mx-auto space-y-3">
-          <span className="text-xs font-semibold uppercase tracking-widest text-mayukha-gold">Authentic Hyderabad Culinary Experience</span>
-          <h1 className="text-3xl sm:text-5xl font-serif font-bold text-mayukha-cream">Interactive Digital Food Menu</h1>
+          <span className="text-xs font-semibold uppercase tracking-widest text-mayukha-gold">Authentic Hyderabad Culinary & Event Experience</span>
+          <h1 className="text-3xl sm:text-5xl font-serif font-bold text-mayukha-cream">Interactive Digital Menu & Banquet Slots</h1>
           <p className="text-mayukha-sand text-sm sm:text-base">
-            Explore our curated culinary items prepared with authentic spices, ghee, and traditional clay-oven tandoor techniques.
+            Explore Soups, Starters, Biryanis, Desserts, and Banquet Booking Slots across Hotel Mayukha KPHB & Kokapet.
           </p>
         </div>
       </section>
@@ -89,7 +90,7 @@ export default function MenuPage() {
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search dish by name, ingredient, or tag..."
+                placeholder="Search dish or banquet slot..."
                 className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-mayukha-dark border border-mayukha-border/80 text-mayukha-cream text-sm placeholder-mayukha-muted focus:outline-none focus:border-mayukha-gold"
               />
               {searchQuery && (
@@ -148,14 +149,14 @@ export default function MenuPage() {
 
           </div>
 
-          {/* Category Tabs Scrollbar */}
+          {/* Category Tabs Scrollbar (Soups, Starters, Biryanis, Desserts, Banquet Booking Slots) */}
           <div className="flex items-center gap-2 overflow-x-auto pb-1 pt-2 no-scrollbar border-t border-mayukha-border/40">
             <button
               onClick={() => setSelectedCategory('all')}
-              className={`px-4 py-2 rounded-xl text-xs font-medium whitespace-nowrap transition ${
+              className={`px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition ${
                 selectedCategory === 'all'
-                  ? 'bg-mayukha-gold/20 text-mayukha-gold border border-mayukha-gold/40'
-                  : 'bg-mayukha-surface text-mayukha-muted hover:text-mayukha-sand'
+                  ? 'bg-mayukha-gold text-mayukha-dark font-bold shadow-gold-glow'
+                  : 'bg-mayukha-surface text-mayukha-sand hover:text-mayukha-cream'
               }`}
             >
               All Categories
@@ -164,12 +165,13 @@ export default function MenuPage() {
               <button
                 key={cat._id}
                 onClick={() => setSelectedCategory(cat.slug)}
-                className={`px-4 py-2 rounded-xl text-xs font-medium whitespace-nowrap transition ${
+                className={`px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition flex items-center gap-1.5 ${
                   selectedCategory === cat.slug
-                    ? 'bg-mayukha-gold/20 text-mayukha-gold border border-mayukha-gold/40'
-                    : 'bg-mayukha-surface text-mayukha-muted hover:text-mayukha-sand'
+                    ? 'bg-mayukha-gold text-mayukha-dark font-bold shadow-gold-glow'
+                    : 'bg-mayukha-surface text-mayukha-sand hover:text-mayukha-gold'
                 }`}
               >
+                {cat.slug === 'banquet-slots' ? <Users className="w-3.5 h-3.5" /> : null}
                 {cat.name}
               </button>
             ))}
@@ -178,85 +180,108 @@ export default function MenuPage() {
 
         {/* Results Counter */}
         <div className="flex justify-between items-center text-xs text-mayukha-muted px-1">
-          <span>Showing <strong className="text-mayukha-gold">{filteredItems.length}</strong> delicious dishes</span>
+          <span>Showing <strong className="text-mayukha-gold">{filteredItems.length}</strong> items in selected menu view</span>
           {selectedCategory !== 'all' && (
             <button onClick={() => setSelectedCategory('all')} className="underline hover:text-mayukha-gold">
-              Reset category filter
+              Show All Categories
             </button>
           )}
         </div>
 
         {/* Menu Grid */}
         {loading ? (
-          <div className="text-center py-20 text-mayukha-gold">Loading culinary menu items...</div>
+          <div className="text-center py-20 text-mayukha-gold font-serif">Loading menu items...</div>
         ) : filteredItems.length === 0 ? (
           <div className="text-center py-20 glass-panel rounded-2xl border border-mayukha-border p-8 space-y-3">
             <Utensils className="w-12 h-12 text-mayukha-muted mx-auto" />
-            <h3 className="text-xl font-serif text-mayukha-cream">No dishes found</h3>
+            <h3 className="text-xl font-serif text-mayukha-cream">No items found</h3>
             <p className="text-sm text-mayukha-muted">Try adjusting your category, diet, or search query filter.</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredItems.map((dish) => (
-              <div
-                key={dish._id}
-                onClick={() => setActiveModalItem(dish)}
-                className="bg-mayukha-surface rounded-2xl overflow-hidden border border-mayukha-border/60 hover:border-mayukha-gold/50 transition duration-300 flex flex-col justify-between group cursor-pointer shadow-lg hover:-translate-y-1"
-              >
-                <div>
-                  <div className="relative h-48 w-full overflow-hidden bg-mayukha-card">
-                    <Image
-                      src={dish.image}
-                      alt={dish.name}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div className="absolute top-3 left-3 bg-mayukha-dark/85 backdrop-blur-md px-2.5 py-1 rounded text-[10px] font-bold uppercase tracking-wider text-mayukha-cream border border-mayukha-border">
-                      {dish.isVeg ? '🟢 Veg' : '🔴 Non-Veg'}
+            {filteredItems.map((item) => {
+              const isBanquetSlot = (item.categoryId as any) === 'cat-banquet' || item.tags?.includes('Banquet Hall');
+              
+              return (
+                <div
+                  key={item._id}
+                  onClick={() => setActiveModalItem(item)}
+                  className={`bg-mayukha-surface rounded-2xl overflow-hidden border ${
+                    isBanquetSlot ? 'border-mayukha-gold/50 shadow-gold-glow' : 'border-mayukha-border/60'
+                  } hover:border-mayukha-gold transition duration-300 flex flex-col justify-between group cursor-pointer shadow-lg hover:-translate-y-1`}
+                >
+                  <div>
+                    <div className="relative h-48 w-full overflow-hidden bg-mayukha-card">
+                      <Image
+                        src={item.image}
+                        alt={item.name}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                      {isBanquetSlot ? (
+                        <div className="absolute top-3 left-3 bg-mayukha-gold text-mayukha-dark font-bold px-2.5 py-1 rounded text-[10px] uppercase tracking-wider shadow">
+                          👑 Banquet Event Slot
+                        </div>
+                      ) : (
+                        <div className="absolute top-3 left-3 bg-mayukha-dark/85 backdrop-blur-md px-2.5 py-1 rounded text-[10px] font-bold uppercase tracking-wider text-mayukha-cream border border-mayukha-border">
+                          {item.isVeg ? '🟢 Veg' : '🔴 Non-Veg'}
+                        </div>
+                      )}
+
+                      {item.isChefSpecial && !isBanquetSlot && (
+                        <div className="absolute top-3 right-3 bg-mayukha-dark/85 backdrop-blur-md px-2 py-0.5 rounded text-[10px] font-bold text-amber-400 border border-mayukha-border flex items-center gap-1">
+                          <Flame className="w-3 h-3" /> Chef Special
+                        </div>
+                      )}
                     </div>
-                    {dish.spiceLevel > 0 && (
-                      <div className="absolute top-3 right-3 bg-mayukha-dark/85 backdrop-blur-md px-2.5 py-1 rounded text-[10px] font-bold text-amber-400 border border-mayukha-border flex items-center gap-1">
-                        {'🌶️'.repeat(dish.spiceLevel)}
-                      </div>
-                    )}
+
+                    <div className="p-5 space-y-2">
+                      <h3 className="font-serif font-bold text-lg text-mayukha-cream group-hover:text-mayukha-gold transition line-clamp-1">
+                        {item.name}
+                      </h3>
+                      <p className="text-xs text-mayukha-muted line-clamp-2 leading-relaxed">
+                        {item.description}
+                      </p>
+                      
+                      {item.tags && item.tags.length > 0 && (
+                        <div className="flex flex-wrap gap-1 pt-1">
+                          {item.tags.map(tag => (
+                            <span key={tag} className="text-[10px] bg-mayukha-card text-mayukha-sand px-2 py-0.5 rounded border border-mayukha-border/40">
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
                   </div>
 
-                  <div className="p-5 space-y-2">
-                    <h3 className="font-serif font-bold text-lg text-mayukha-cream group-hover:text-mayukha-gold transition line-clamp-1">
-                      {dish.name}
-                    </h3>
-                    <p className="text-xs text-mayukha-muted line-clamp-2 leading-relaxed">
-                      {dish.description}
-                    </p>
-                    
-                    {dish.tags && dish.tags.length > 0 && (
-                      <div className="flex flex-wrap gap-1 pt-1">
-                        {dish.tags.map(tag => (
-                          <span key={tag} className="text-[10px] bg-mayukha-card text-mayukha-sand px-2 py-0.5 rounded border border-mayukha-border/40">
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
+                  <div className="px-5 pb-5 pt-3 border-t border-mayukha-border/40 flex items-center justify-between">
+                    <span className="font-serif font-bold text-xl text-mayukha-gold">₹{item.price}</span>
+                    {isBanquetSlot ? (
+                      <Link
+                        href="/banquets"
+                        onClick={(e) => e.stopPropagation()}
+                        className="text-xs font-bold px-3 py-1.5 rounded-lg bg-mayukha-gold text-mayukha-dark hover:bg-mayukha-goldDark transition shadow"
+                      >
+                        Book Banquet Slot →
+                      </Link>
+                    ) : (
+                      <span className="text-xs font-semibold px-3 py-1.5 rounded-lg bg-mayukha-card text-mayukha-cream group-hover:bg-mayukha-gold group-hover:text-mayukha-dark transition">
+                        View Details
+                      </span>
                     )}
                   </div>
                 </div>
-
-                <div className="px-5 pb-5 pt-3 border-t border-mayukha-border/40 flex items-center justify-between">
-                  <span className="font-serif font-bold text-2xl text-mayukha-gold">₹{dish.price}</span>
-                  <span className="text-xs font-semibold px-3 py-1.5 rounded-lg bg-mayukha-card text-mayukha-cream group-hover:bg-mayukha-gold group-hover:text-mayukha-dark transition">
-                    View Details & Ingredients
-                  </span>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         )}
       </main>
 
-      {/* Dish Detail Modal */}
+      {/* Item Detail Modal */}
       {activeModalItem && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-mayukha-dark/80 backdrop-blur-md animate-in fade-in">
-          <div className="bg-mayukha-surface border border-mayukha-gold/30 rounded-2xl max-w-lg w-full overflow-hidden shadow-deep space-y-4 relative">
+          <div className="bg-mayukha-surface border border-mayukha-gold/40 rounded-2xl max-w-lg w-full overflow-hidden shadow-deep space-y-4 relative">
             <button
               onClick={() => setActiveModalItem(null)}
               className="absolute top-3 right-3 z-10 p-2 rounded-full bg-mayukha-dark/80 text-mayukha-cream hover:text-mayukha-gold transition"
@@ -278,7 +303,7 @@ export default function MenuPage() {
               <div className="flex justify-between items-start">
                 <div>
                   <span className="text-xs font-bold uppercase tracking-wider text-mayukha-gold">
-                    {activeModalItem.isVeg ? '🟢 Pure Vegetarian' : '🔴 Non-Vegetarian'}
+                    {activeModalItem.tags?.includes('Banquet Hall') ? '👑 Banquet Event Hall Slot' : activeModalItem.isVeg ? '🟢 Pure Vegetarian' : '🔴 Non-Vegetarian'}
                   </span>
                   <h2 className="text-2xl font-serif font-bold text-mayukha-cream">{activeModalItem.name}</h2>
                 </div>
@@ -289,31 +314,6 @@ export default function MenuPage() {
                 {activeModalItem.description}
               </p>
 
-              <div className="grid grid-cols-2 gap-3 pt-2 text-xs">
-                <div className="p-3 rounded-xl bg-mayukha-dark border border-mayukha-border/60">
-                  <span className="block text-mayukha-muted mb-1">Spice Index</span>
-                  <span className="font-semibold text-amber-400 flex items-center gap-1">
-                    {activeModalItem.spiceLevel === 0 ? 'Mild' : '🌶️'.repeat(activeModalItem.spiceLevel) + ` (${activeModalItem.spiceLevel}/3)`}
-                  </span>
-                </div>
-
-                <div className="p-3 rounded-xl bg-mayukha-dark border border-mayukha-border/60">
-                  <span className="block text-mayukha-muted mb-1">Prep Time</span>
-                  <span className="font-semibold text-mayukha-cream flex items-center gap-1">
-                    <Clock className="w-3.5 h-3.5 text-mayukha-gold" /> {activeModalItem.preparationTimeMinutes || 20} Mins
-                  </span>
-                </div>
-              </div>
-
-              {activeModalItem.allergenInfo && activeModalItem.allergenInfo.length > 0 && (
-                <div className="p-3 rounded-xl bg-mayukha-card/60 border border-mayukha-border/40 text-xs space-y-1">
-                  <span className="font-semibold text-mayukha-gold flex items-center gap-1">
-                    <AlertTriangle className="w-3.5 h-3.5" /> Allergen Information:
-                  </span>
-                  <p className="text-mayukha-sand">Contains: {activeModalItem.allergenInfo.join(', ')}</p>
-                </div>
-              )}
-
               <div className="pt-3 flex gap-3">
                 <button
                   onClick={() => setActiveModalItem(null)}
@@ -321,12 +321,21 @@ export default function MenuPage() {
                 >
                   Close
                 </button>
-                <a
-                  href="/reserve"
-                  className="flex-1 py-3 text-center rounded-xl bg-mayukha-gold text-mayukha-dark font-bold text-sm shadow-gold-glow hover:bg-mayukha-goldDark transition"
-                >
-                  Book Table for Dish
-                </a>
+                {activeModalItem.tags?.includes('Banquet Hall') ? (
+                  <Link
+                    href="/banquets"
+                    className="flex-1 py-3 text-center rounded-xl bg-mayukha-gold text-mayukha-dark font-bold text-sm shadow-gold-glow hover:bg-mayukha-goldDark transition"
+                  >
+                    Request Banquet Quote
+                  </Link>
+                ) : (
+                  <Link
+                    href="/reserve"
+                    className="flex-1 py-3 text-center rounded-xl bg-mayukha-gold text-mayukha-dark font-bold text-sm shadow-gold-glow hover:bg-mayukha-goldDark transition"
+                  >
+                    Book Table for Dish
+                  </Link>
+                )}
               </div>
             </div>
           </div>

@@ -59,8 +59,23 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     allergenInfo: ['Gluten'],
     tags: ['Vegetarian', 'Starter']
   },
+  {
+    _id: 'menu-sp-4',
+    name: 'Mutton Paya Soup',
+    slug: 'mutton-paya-soup',
+    categoryId: 'cat-1',
+    price: 240,
+    description: 'Traditional slow-cooked goat trotters soup infused with ginger, garlic, mint, and crushed black pepper.',
+    isVeg: false,
+    spiceLevel: 2,
+    isAvailable: true,
+    isChefSpecial: true,
+    image: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80',
+    allergenInfo: ['None'],
+    tags: ['Authentic Broth', 'Hyderabadi Classic']
+  },
 
-  // 2. Signature Biryanis (6 Authentic Biryani Options)
+  // 2. Signature Biryanis (6 Biryanis with Matched Images)
   {
     _id: 'menu-bir-1',
     name: 'Hyderabadi Special Chicken Dum Biryani',
@@ -198,6 +213,21 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     allergenInfo: ['Dairy'],
     tags: ['Vegetarian', 'Achari']
   },
+  {
+    _id: 'menu-keb-4',
+    name: 'Reshmi Murgh Kebab',
+    slug: 'reshmi-murgh-kebab',
+    categoryId: 'cat-3',
+    price: 440,
+    description: 'Silky smooth chicken boneless cubes marinated in cream, egg white, cheese, and mild white pepper, skewers grilled.',
+    isVeg: false,
+    spiceLevel: 1,
+    isAvailable: true,
+    isChefSpecial: false,
+    image: 'https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=800&q=80',
+    allergenInfo: ['Dairy', 'Egg'],
+    tags: ['Reshmi Kebab', 'Creamy']
+  },
 
   // 4. Curries & Gravies
   {
@@ -245,6 +275,21 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     allergenInfo: ['Dairy', 'Nuts'],
     tags: ['Vegetarian', 'Rich']
   },
+  {
+    _id: 'menu-cur-4',
+    name: 'Gongura Mutton Curry',
+    slug: 'gongura-mutton-curry',
+    categoryId: 'cat-4',
+    price: 490,
+    description: 'Authentic Andhra/Telangana delicacy of tender mutton pieces simmered with sour sorrel leaves (Gongura) and spices.',
+    isVeg: false,
+    spiceLevel: 3,
+    isAvailable: true,
+    isChefSpecial: true,
+    image: 'https://images.unsplash.com/photo-1545247181-516773cae754?auto=format&fit=crop&w=800&q=80',
+    allergenInfo: ['None'],
+    tags: ['Gongura', 'Tangy & Spicy']
+  },
 
   // 5. Indian Breads
   {
@@ -276,6 +321,21 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     image: 'https://images.unsplash.com/photo-1505253716362-afaea1d3d1af?auto=format&fit=crop&w=800&q=80',
     allergenInfo: ['Gluten', 'Dairy'],
     tags: ['Stuffed Bread', 'Kulcha']
+  },
+  {
+    _id: 'menu-brd-3',
+    name: 'Tandoori Butter Roti',
+    slug: 'tandoori-butter-roti',
+    categoryId: 'cat-5',
+    price: 45,
+    description: 'Whole wheat flatbread baked in clay tandoor and topped with pure melted butter.',
+    isVeg: true,
+    spiceLevel: 0,
+    isAvailable: true,
+    isChefSpecial: false,
+    image: 'https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=800&q=80',
+    allergenInfo: ['Gluten', 'Dairy'],
+    tags: ['Whole Wheat', 'Roti']
   },
 
   // 6. Desserts & Beverages
@@ -323,6 +383,21 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     image: 'https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=800&q=80',
     allergenInfo: ['Dairy', 'Nuts'],
     tags: ['Beverage', 'Cooler']
+  },
+  {
+    _id: 'menu-des-4',
+    name: 'Gulab Jamun with Creamy Rabri (2 Pcs)',
+    slug: 'gulab-jamun-with-rabri',
+    categoryId: 'cat-6',
+    price: 160,
+    description: 'Soft golden milk-solid dumplings soaked in rose-cardamom syrup and served over thick saffron rabri.',
+    isVeg: true,
+    spiceLevel: 0,
+    isAvailable: true,
+    isChefSpecial: false,
+    image: 'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=800&q=80',
+    allergenInfo: ['Dairy', 'Gluten', 'Nuts'],
+    tags: ['Dessert', 'Sweet']
   }
 ];
 

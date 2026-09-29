@@ -122,7 +122,7 @@ const seedDatabase = async () => {
       categoryMap[cat.slug] = cat._id;
     });
 
-    // Seed Menu Items matching Dish Names
+    // Seed Menu Items (6 Biryanis & Full Category Items)
     const menuItemsData = [
       // 1. Soups & Appetizers
       {
@@ -165,7 +165,7 @@ const seedDatabase = async () => {
         tags: ['Vegetarian', 'Starter']
       },
 
-      // 2. Biryanis
+      // 2. Biryanis (6 Options)
       {
         name: 'Hyderabadi Special Chicken Dum Biryani',
         slug: 'hyderabadi-special-chicken-dum-biryani',
@@ -193,17 +193,56 @@ const seedDatabase = async () => {
         tags: ['Mutton', 'Royal', 'Dum Biryani']
       },
       {
+        name: 'Special Boneless Chicken Biryani',
+        slug: 'special-boneless-chicken-biryani',
+        categoryId: categoryMap['biryanis'],
+        price: 410,
+        description: 'Juicy boneless chicken tikka pieces cooked in rich biryani masala and dum-layered with saffron basmati rice.',
+        isVeg: false,
+        spiceLevel: 2,
+        isChefSpecial: true,
+        image: 'https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=800&q=80',
+        allergenInfo: ['Dairy'],
+        tags: ['Boneless', 'Chef Special']
+      },
+      {
+        name: 'Telangana Ulavacharu Chicken Biryani',
+        slug: 'telangana-ulavacharu-chicken-biryani',
+        categoryId: categoryMap['biryanis'],
+        price: 430,
+        description: 'Regional delicacy of basmati rice infused with traditional thick horsegram soup (Ulavacharu) and spicy marinated chicken.',
+        isVeg: false,
+        spiceLevel: 3,
+        isChefSpecial: true,
+        image: 'https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&fit=crop&w=800&q=80',
+        allergenInfo: ['None'],
+        tags: ['Regional Special', 'Ulavacharu', 'Spicy']
+      },
+      {
         name: 'Paneer Tikka Dum Biryani',
         slug: 'paneer-tikka-dum-biryani',
         categoryId: categoryMap['biryanis'],
         price: 320,
-        description: 'Charcoal-grilled marinated cottage cheese cubes dum-cooked with fragrant spice-infused basmati rice.',
+        description: 'Charcoal-grilled marinated cottage cheese cubes dum-cooked with fragrant spice-infused saffron basmati rice.',
         isVeg: true,
         spiceLevel: 1,
         isChefSpecial: false,
         image: 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=800&q=80',
         allergenInfo: ['Dairy'],
-        tags: ['Vegetarian', 'Paneer']
+        tags: ['Vegetarian', 'Paneer Biryani']
+      },
+      {
+        name: 'Mayukha Special Egg Dum Biryani',
+        slug: 'mayukha-special-egg-dum-biryani',
+        categoryId: categoryMap['biryanis'],
+        price: 290,
+        description: 'Hard-boiled eggs cooked in aromatic biryani gravies and dum-sealed with spiced long-grain basmati rice.',
+        isVeg: false,
+        spiceLevel: 2,
+        isChefSpecial: false,
+        image: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=80',
+        allergenInfo: ['Egg'],
+        tags: ['Egg Special', 'Dum Biryani']
       },
 
       // 3. Tandoori & Kebabs
@@ -359,7 +398,7 @@ const seedDatabase = async () => {
     ];
 
     await MenuItem.insertMany(menuItemsData);
-    console.log(`🍲 Seeded ${menuItemsData.length} Menu Items with matched dish photos.`);
+    console.log(`🍲 Seeded ${menuItemsData.length} Menu Items including 6 biryanis with matched photos.`);
 
     await Testimonial.insertMany(testimonialsData);
     console.log(`⭐ Seeded ${testimonialsData.length} Verified Customer Testimonials.`);

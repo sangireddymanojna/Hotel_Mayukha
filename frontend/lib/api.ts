@@ -60,7 +60,7 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     tags: ['Vegetarian', 'Starter']
   },
 
-  // 2. Signature Biryanis
+  // 2. Signature Biryanis (6 Authentic Biryani Options)
   {
     _id: 'menu-bir-1',
     name: 'Hyderabadi Special Chicken Dum Biryani',
@@ -93,18 +93,63 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
   },
   {
     _id: 'menu-bir-3',
+    name: 'Special Boneless Chicken Biryani',
+    slug: 'special-boneless-chicken-biryani',
+    categoryId: 'cat-2',
+    price: 410,
+    description: 'Juicy boneless chicken tikka pieces cooked in rich biryani masala and dum-layered with saffron basmati rice.',
+    isVeg: false,
+    spiceLevel: 2,
+    isAvailable: true,
+    isChefSpecial: true,
+    image: 'https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=800&q=80',
+    allergenInfo: ['Dairy'],
+    tags: ['Boneless', 'Chef Special']
+  },
+  {
+    _id: 'menu-bir-4',
+    name: 'Telangana Ulavacharu Chicken Biryani',
+    slug: 'telangana-ulavacharu-chicken-biryani',
+    categoryId: 'cat-2',
+    price: 430,
+    description: 'Regional delicacy of basmati rice infused with traditional thick horsegram soup (Ulavacharu) and spicy marinated chicken.',
+    isVeg: false,
+    spiceLevel: 3,
+    isAvailable: true,
+    isChefSpecial: true,
+    image: 'https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&fit=crop&w=800&q=80',
+    allergenInfo: ['None'],
+    tags: ['Regional Special', 'Ulavacharu', 'Spicy']
+  },
+  {
+    _id: 'menu-bir-5',
     name: 'Paneer Tikka Dum Biryani',
     slug: 'paneer-tikka-dum-biryani',
     categoryId: 'cat-2',
     price: 320,
-    description: 'Charcoal-grilled marinated cottage cheese cubes dum-cooked with fragrant spice-infused basmati rice.',
+    description: 'Charcoal-grilled marinated cottage cheese cubes dum-cooked with fragrant spice-infused saffron basmati rice.',
     isVeg: true,
     spiceLevel: 1,
     isAvailable: true,
     isChefSpecial: false,
     image: 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=800&q=80',
     allergenInfo: ['Dairy'],
-    tags: ['Vegetarian', 'Paneer']
+    tags: ['Vegetarian', 'Paneer Biryani']
+  },
+  {
+    _id: 'menu-bir-6',
+    name: 'Mayukha Special Egg Dum Biryani',
+    slug: 'mayukha-special-egg-dum-biryani',
+    categoryId: 'cat-2',
+    price: 290,
+    description: 'Hard-boiled eggs cooked in aromatic biryani gravies and dum-sealed with spiced long-grain basmati rice.',
+    isVeg: false,
+    spiceLevel: 2,
+    isAvailable: true,
+    isChefSpecial: false,
+    image: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=80',
+    allergenInfo: ['Egg'],
+    tags: ['Egg Special', 'Dum Biryani']
   },
 
   // 3. Tandoori & Kebabs

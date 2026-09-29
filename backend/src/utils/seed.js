@@ -8,8 +8,6 @@ const Reservation = require('../models/Reservation');
 const BanquetEnquiry = require('../models/BanquetEnquiry');
 const Testimonial = require('../models/Testimonial');
 
-const connectDB = require('../config/db');
-
 const categoriesData = [
   {
     name: 'Soups & Appetizers',
@@ -93,7 +91,6 @@ const seedDatabase = async () => {
     await mongoose.connect(connStr);
     console.log('✅ Connected to MongoDB for database seeding...');
 
-    // Clear existing collection records
     await User.deleteMany({});
     await MenuCategory.deleteMany({});
     await MenuItem.deleteMany({});
@@ -125,9 +122,50 @@ const seedDatabase = async () => {
       categoryMap[cat.slug] = cat._id;
     });
 
-    // Seed Menu Items
+    // Seed Menu Items matching Dish Names
     const menuItemsData = [
-      // Biryanis
+      // 1. Soups & Appetizers
+      {
+        name: 'Sweet Corn Chicken Soup',
+        slug: 'sweet-corn-chicken-soup',
+        categoryId: categoryMap['soups-starters'],
+        price: 190,
+        description: 'Piping hot velvety soup blend with crushed sweet corn kernels, tender chicken shreds, and cracked white pepper.',
+        isVeg: false,
+        spiceLevel: 0,
+        isChefSpecial: false,
+        image: 'https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=800&q=80',
+        allergenInfo: ['Egg'],
+        tags: ['Soup', 'Comfort Food']
+      },
+      {
+        name: 'Apollo Fish Fry',
+        slug: 'apollo-fish-fry',
+        categoryId: categoryMap['soups-starters'],
+        price: 390,
+        description: 'Iconic Hyderabadi street style boneless fish fillets battered, deep-fried, and tossed in spicy yogurt, curry leaves, and green chillies.',
+        isVeg: false,
+        spiceLevel: 3,
+        isChefSpecial: true,
+        image: 'https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=800&q=80',
+        allergenInfo: ['Seafood', 'Dairy'],
+        tags: ['Hyderabadi Special', 'Bestseller', 'Spicy']
+      },
+      {
+        name: 'Crispy Gobi 65',
+        slug: 'crispy-gobi-65',
+        categoryId: categoryMap['soups-starters'],
+        price: 260,
+        description: 'Crispy fried cauliflower florets marinated in south Indian spices, garlic, ginger, and curry leaves.',
+        isVeg: true,
+        spiceLevel: 2,
+        isChefSpecial: false,
+        image: 'https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=800&q=80',
+        allergenInfo: ['Gluten'],
+        tags: ['Vegetarian', 'Starter']
+      },
+
+      // 2. Biryanis
       {
         name: 'Hyderabadi Special Chicken Dum Biryani',
         slug: 'hyderabadi-special-chicken-dum-biryani',
@@ -168,13 +206,13 @@ const seedDatabase = async () => {
         tags: ['Vegetarian', 'Paneer']
       },
 
-      // Tandoori & Kebabs
+      // 3. Tandoori & Kebabs
       {
         name: 'Mayukha Special Tangdi Kebab (4 Pcs)',
         slug: 'mayukha-special-tangdi-kebab',
         categoryId: categoryMap['tandoori-kebabs'],
         price: 420,
-        description: 'Chicken drumsticks marinated in rich cashew paste, hung curd, and roasted garlic, clay-oven grilled to perfection.',
+        description: 'Chicken drumsticks marinated in rich cashew paste, hung curd, and roasted garlic, clay-oven grilled over charcoal flames.',
         isVeg: false,
         spiceLevel: 2,
         isChefSpecial: true,
@@ -209,7 +247,7 @@ const seedDatabase = async () => {
         tags: ['Vegetarian', 'Achari']
       },
 
-      // Curries & Gravies
+      // 4. Curries & Gravies
       {
         name: 'Butter Chicken Masala',
         slug: 'butter-chicken-masala',
@@ -250,43 +288,82 @@ const seedDatabase = async () => {
         tags: ['Vegetarian', 'Rich']
       },
 
-      // Breads & Desserts
+      // 5. Breads
       {
         name: 'Butter Garlic Naan',
         slug: 'butter-garlic-naan',
         categoryId: categoryMap['indian-breads'],
         price: 75,
-        description: 'Leavened refined flour flatbread brushed with garlic butter and fresh coriander.',
+        description: 'Leavened refined flour flatbread baked in clay tandoor and brushed with garlic butter and fresh coriander.',
         isVeg: true,
         spiceLevel: 0,
         isChefSpecial: false,
         image: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=80',
         allergenInfo: ['Gluten', 'Dairy'],
-        tags: ['Breads']
+        tags: ['Breads', 'Tandoori']
       },
+      {
+        name: 'Amritsari Paneer Kulcha',
+        slug: 'amritsari-paneer-kulcha',
+        categoryId: categoryMap['indian-breads'],
+        price: 95,
+        description: 'Crisp layered tandoori flatbread stuffed with spiced cottage cheese, onions, and pomegranate seeds.',
+        isVeg: true,
+        spiceLevel: 1,
+        isChefSpecial: false,
+        image: 'https://images.unsplash.com/photo-1505253716362-afaea1d3d1af?auto=format&fit=crop&w=800&q=80',
+        allergenInfo: ['Gluten', 'Dairy'],
+        tags: ['Stuffed Bread', 'Kulcha']
+      },
+
+      // 6. Desserts & Beverages
       {
         name: 'Double Ka Meetha',
         slug: 'double-ka-meetha',
         categoryId: categoryMap['desserts-beverages'],
         price: 180,
-        description: 'Authentic Hyderabadi dessert made of fried bread soaked in saffron-infused rabri topped with pistachios.',
+        description: 'Authentic Hyderabadi royal dessert made of fried bread soaked in saffron-infused rabri topped with pistachios.',
         isVeg: true,
         spiceLevel: 0,
         isChefSpecial: true,
         image: 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=800&q=80',
         allergenInfo: ['Dairy', 'Nuts', 'Gluten'],
         tags: ['Dessert', 'Hyderabadi Classic']
+      },
+      {
+        name: 'Qubani Ka Meetha with Vanilla Cream',
+        slug: 'qubani-ka-meetha',
+        categoryId: categoryMap['desserts-beverages'],
+        price: 210,
+        description: 'Traditional Hyderabadi delicacy made of stewed apricots served with rich vanilla ice cream.',
+        isVeg: true,
+        spiceLevel: 0,
+        isChefSpecial: true,
+        image: 'https://images.unsplash.com/photo-1579372786545-d24232daf58c?auto=format&fit=crop&w=800&q=80',
+        allergenInfo: ['Dairy', 'Nuts'],
+        tags: ['Hyderabadi Classic', 'Dessert']
+      },
+      {
+        name: 'Special Hyderabadi Mango Lassi',
+        slug: 'special-hyderabadi-mango-lassi',
+        categoryId: categoryMap['desserts-beverages'],
+        price: 130,
+        description: 'Chilled thick sweet yogurt smoothie blended with ripe mango pulp and topped with saffron and chopped almonds.',
+        isVeg: true,
+        spiceLevel: 0,
+        isChefSpecial: false,
+        image: 'https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=800&q=80',
+        allergenInfo: ['Dairy', 'Nuts'],
+        tags: ['Beverage', 'Cooler']
       }
     ];
 
     await MenuItem.insertMany(menuItemsData);
-    console.log(`🍲 Seeded ${menuItemsData.length} Menu Items.`);
+    console.log(`🍲 Seeded ${menuItemsData.length} Menu Items with matched dish photos.`);
 
-    // Seed Testimonials
     await Testimonial.insertMany(testimonialsData);
     console.log(`⭐ Seeded ${testimonialsData.length} Verified Customer Testimonials.`);
 
-    // Seed Initial Sample Reservation & Banquet Enquiry
     await Reservation.create({
       bookingId: 'MYK-RES-2026-1001',
       customerName: 'Suresh Chandra',

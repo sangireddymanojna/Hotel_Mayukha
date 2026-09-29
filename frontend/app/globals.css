@@ -52,3 +52,46 @@ body {
   border-color: rgba(212, 175, 55, 0.5);
   box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
 }
+
+/* Sparkling Effect Background Keyframes & Classes */
+@keyframes twinkleSparkle {
+  0%, 100% { opacity: 0.15; transform: scale(0.6) rotate(0deg); }
+  50% { opacity: 0.95; transform: scale(1.4) rotate(180deg); filter: drop-shadow(0 0 10px #D4AF37); }
+}
+
+@keyframes floatSparkleDust {
+  0% { transform: translateY(0px) translateX(0px); opacity: 0; }
+  20% { opacity: 0.85; }
+  80% { opacity: 0.85; }
+  100% { transform: translateY(-120px) translateX(30px); opacity: 0; }
+}
+
+@keyframes pulseGoldGlow {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.08); }
+}
+
+.sparkle-star {
+  position: absolute;
+  pointer-events: none;
+  animation: twinkleSparkle infinite ease-in-out;
+}
+
+.floating-sparkle-particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #D4AF37;
+  box-shadow: 0 0 8px #D4AF37, 0 0 14px #FFF0C2;
+  animation: floatSparkleDust infinite linear;
+  pointer-events: none;
+}
+
+.ambient-gold-orb {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, rgba(212, 175, 55, 0.02) 60%, transparent 100%);
+  animation: pulseGoldGlow 8s infinite ease-in-out;
+  pointer-events: none;
+}

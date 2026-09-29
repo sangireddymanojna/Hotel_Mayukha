@@ -6,6 +6,14 @@ const mongoSanitize = require('express-mongo-sanitize');
 require('dotenv').config();
 
 const connectDB = require('./src/config/db');
+const errorHandler = require('./src/middleware/errorHandler');
+
+// Route Imports
+const menuRoutes = require('./src/routes/menuRoutes');
+const reservationRoutes = require('./src/routes/reservationRoutes');
+const banquetRoutes = require('./src/routes/banquetRoutes');
+const testimonialRoutes = require('./src/routes/testimonialRoutes');
+const adminRoutes = require('./src/routes/adminRoutes');
 
 const app = express();
 
@@ -16,7 +24,7 @@ connectDB();
 app.use(helmet());
 app.use(mongoSanitize());
 
-// CORS configuration
+// CORS Configuration
 const allowedOrigins = [
   process.env.CORS_ORIGIN || 'http://localhost:3000',
   'http://localhost:3000',
@@ -29,7 +37,7 @@ app.use(cors({
     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
-      callback(null, true); // Permissive in dev/testing
+      callback(null, true);
     }
   },
   credentials: true,
@@ -39,7 +47,7 @@ app.use(cors({
 
 // Rate Limiting
 const apiLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
+  windowMs: 15 * 60 * 1000,
   max: 300,
   standardHeaders: true,
   legacyHeaders: false,
@@ -61,19 +69,28 @@ app.get('/api/health', (req, res) => {
   });
 });
 
+// API Routes Mounting
+app.use('/api/menu', menuRoutes);
+app.use('/api/reservations', reservationRoutes);
+app.use('/api/banquets', banquetRoutes);
+app.use('/api/testimonials', testimonialRoutes);
+app.use('/api/admin', adminRoutes);
+
 // Root route
 app.get('/', (req, res) => {
   res.send('Hotel Mayukha API Backend is live. Visit /api/health for system status.');
 });
 
-// Global Error Handler
-app.use((err, req, res, next) => {
-  console.error('Unhandled Server Error:', err);
-  res.status(err.status || 500).json({
-    status: 'error',
-    message: err.message || 'Internal Server Error'
+// 404 Route Handler
+app.use('*', (req, res) => {
+  res.status(404).json({
+    status: 'fail',
+    message: `Can't find ${req.originalUrl} on this server!`
   });
 });
+
+// Global Error Handler Middleware
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

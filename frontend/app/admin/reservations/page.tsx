@@ -74,7 +74,7 @@ export default function AdminReservationsPage() {
   });
 
   return (
-    <div className="min-h-screen bg-mayukha-dark flex flex-col">
+    <div className="min-h-screen bg-transparent flex flex-col relative z-10">
       <AdminNav />
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full flex-1 space-y-6">

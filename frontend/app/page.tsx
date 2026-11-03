@@ -3,14 +3,14 @@ import Image from 'next/image';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { fetchMenuItems, fetchTestimonials } from '@/lib/api';
-import { Utensils, Calendar, Users, Award, Star, Flame, Waves, Trees, ChevronRight, Phone, CheckCircle2 } from 'lucide-react';
+import { Utensils, Calendar, Users, Award, Star, Flame, Waves, Trees, ChevronRight, Phone, CheckCircle2, Bike } from 'lucide-react';
 
 export default async function Home() {
   const featuredDishes = await fetchMenuItems({ chefSpecial: 'true' });
   const testimonials = await fetchTestimonials();
 
   return (
-    <div className="min-h-screen flex flex-col bg-mayukha-dark">
+    <div className="min-h-screen flex flex-col bg-transparent">
       <Header />
 
       {/* HERO SECTION */}
@@ -45,35 +45,35 @@ export default async function Home() {
           <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
             <Link
               href="/menu"
-              className="px-8 py-4 rounded-xl bg-gradient-to-r from-mayukha-gold to-mayukha-goldDark text-mayukha-dark font-bold text-base shadow-gold-glow hover:brightness-110 transition-all duration-300 transform hover:-translate-y-1 flex items-center gap-2"
+              className="px-8 py-4 rounded-xl bg-gradient-to-r from-mayukha-gold to-mayukha-goldDark text-mayukha-dark font-bold text-base shadow-gold-glow hover:brightness-110 transition-all duration-300 transform hover:-translate-y-1 flex items-center gap-2 card-shine"
             >
               <Utensils className="w-5 h-5" />
               Explore Digital Menu
             </Link>
             <Link
               href="/reserve"
-              className="px-8 py-4 rounded-xl bg-mayukha-card text-mayukha-cream border border-mayukha-gold/40 font-semibold text-base hover:border-mayukha-gold transition-all duration-300 transform hover:-translate-y-1 flex items-center gap-2 glass-panel"
+              className="px-8 py-4 rounded-xl radiant-card card-shine text-mayukha-cream border border-mayukha-gold/40 font-semibold text-base hover:border-mayukha-gold transition-all duration-300 transform hover:-translate-y-1 flex items-center gap-2"
             >
               <Calendar className="w-5 h-5 text-mayukha-gold" />
-              Reserve a Table
+              Book a Table
             </Link>
           </div>
 
           {/* Quick Stats Grid */}
           <div className="pt-12 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto text-left">
-            <div className="p-4 rounded-xl glass-panel border border-mayukha-gold/15">
+            <div className="p-4 rounded-xl radiant-card card-shine">
               <span className="block text-2xl font-serif font-bold text-mayukha-gold">2 Distinct</span>
               <span className="text-xs text-mayukha-sand">Aqua & Jungle Themes</span>
             </div>
-            <div className="p-4 rounded-xl glass-panel border border-mayukha-gold/15">
+            <div className="p-4 rounded-xl radiant-card card-shine">
               <span className="block text-2xl font-serif font-bold text-mayukha-gold">50 - 200</span>
               <span className="text-xs text-mayukha-sand">Banquet Guests Capacity</span>
             </div>
-            <div className="p-4 rounded-xl glass-panel border border-mayukha-gold/15">
+            <div className="p-4 rounded-xl radiant-card card-shine">
               <span className="block text-2xl font-serif font-bold text-mayukha-gold">100% Dum</span>
               <span className="text-xs text-mayukha-sand">Authentic Handi Biryani</span>
             </div>
-            <div className="p-4 rounded-xl glass-panel border border-mayukha-gold/15">
+            <div className="p-4 rounded-xl radiant-card card-shine">
               <span className="block text-2xl font-serif font-bold text-mayukha-gold">KPHB & Kokapet</span>
               <span className="text-xs text-mayukha-sand">Hyderabad Locations</span>
             </div>
@@ -92,49 +92,79 @@ export default async function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Aqua Theme Card */}
-            <div className="relative rounded-2xl overflow-hidden glass-panel border border-mayukha-gold/20 p-8 space-y-6 group gold-border-glow">
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-xl bg-blue-900/40 text-cyan-400 flex items-center justify-center border border-cyan-500/30">
-                  <Waves className="w-6 h-6" />
-                </div>
-                <div>
-                  <h3 className="text-2xl font-serif font-bold text-mayukha-cream">Aqua Theme Restaurant</h3>
-                  <span className="text-xs text-cyan-300 font-medium">Calming Aquatic Ambience & Fine Dining</span>
-                </div>
+            <div className="relative rounded-2xl overflow-hidden glass-panel border border-cyan-500/30 p-8 space-y-6 group gold-border-glow min-h-[340px] flex flex-col justify-between">
+              <div className="absolute inset-0 z-0">
+                <Image
+                  src="/images/gallery/aqua-aquarium-tank.jpg"
+                  alt="Aqua Theme Dining Hall"
+                  fill
+                  className="object-cover opacity-35 group-hover:scale-105 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-mayukha-dark via-mayukha-dark/85 to-blue-950/60" />
               </div>
-              <p className="text-sm text-mayukha-sand leading-relaxed">
-                Step into a serene marine atmosphere with soothing blue illumination and water features. Perfect for romantic dinners, family gatherings, and seafood lovers.
-              </p>
-              <ul className="space-y-2 text-xs text-mayukha-muted">
-                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-mayukha-gold" /> Soothing ambient aquatic lighting</li>
-                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-mayukha-gold" /> Special seafood & tandoori platters</li>
-              </ul>
-              <Link href="/reserve" className="inline-flex items-center text-xs font-bold text-mayukha-gold group-hover:translate-x-1 transition-transform">
-                Reserve Aqua Seating <ChevronRight className="w-4 h-4 ml-1" />
-              </Link>
+
+              <div className="relative z-10 space-y-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-xl bg-cyan-950/80 text-cyan-400 flex items-center justify-center border border-cyan-500/40 shadow-lg">
+                    <Waves className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-serif font-bold text-mayukha-cream">Aqua Theme Restaurant</h3>
+                    <span className="text-xs text-cyan-300 font-medium">Calming Aquatic Ambience & Fine Dining</span>
+                  </div>
+                </div>
+                <p className="text-sm text-mayukha-sand leading-relaxed">
+                  Step into a serene marine atmosphere with soothing blue illumination, coral decor, and a large living aquarium fish tank. Perfect for romantic dinners and family gatherings.
+                </p>
+                <ul className="space-y-2 text-xs text-mayukha-sand">
+                  <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-cyan-400" /> Soothing ambient aquatic lighting & living aquarium</li>
+                  <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-cyan-400" /> Special seafood & tandoori platters</li>
+                </ul>
+              </div>
+
+              <div className="relative z-10 pt-2">
+                <Link href="/reserve" className="inline-flex items-center text-xs font-bold text-mayukha-gold group-hover:translate-x-1 transition-transform">
+                  Reserve Aqua Seating <ChevronRight className="w-4 h-4 ml-1" />
+                </Link>
+              </div>
             </div>
 
             {/* Jungle Theme Card */}
-            <div className="relative rounded-2xl overflow-hidden glass-panel border border-mayukha-gold/20 p-8 space-y-6 group gold-border-glow">
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-xl bg-emerald-900/40 text-emerald-400 flex items-center justify-center border border-emerald-500/30">
-                  <Trees className="w-6 h-6" />
-                </div>
-                <div>
-                  <h3 className="text-2xl font-serif font-bold text-mayukha-cream">Jungle Theme Restaurant</h3>
-                  <span className="text-xs text-emerald-300 font-medium">Exotic Greenery & Forest Vibe</span>
-                </div>
+            <div className="relative rounded-2xl overflow-hidden glass-panel border border-emerald-500/30 p-8 space-y-6 group gold-border-glow min-h-[340px] flex flex-col justify-between">
+              <div className="absolute inset-0 z-0">
+                <Image
+                  src="/images/gallery/jungle-entrance-arch.jpg"
+                  alt="Jungle Theme Dining Hall Entrance"
+                  fill
+                  className="object-cover object-top opacity-35 group-hover:scale-105 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-mayukha-dark via-mayukha-dark/85 to-emerald-950/60" />
               </div>
-              <p className="text-sm text-mayukha-sand leading-relaxed">
-                Immerse yourself in lush botanical surroundings with rainforest aesthetic elements. Loved by kids, families, and birthday party groups.
-              </p>
-              <ul className="space-y-2 text-xs text-mayukha-muted">
-                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-mayukha-gold" /> Immersive jungle decor & ambient soundscapes</li>
-                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-mayukha-gold" /> Kid-friendly seating & large family tables</li>
-              </ul>
-              <Link href="/reserve" className="inline-flex items-center text-xs font-bold text-mayukha-gold group-hover:translate-x-1 transition-transform">
-                Reserve Jungle Seating <ChevronRight className="w-4 h-4 ml-1" />
-              </Link>
+
+              <div className="relative z-10 space-y-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-xl bg-emerald-950/80 text-emerald-400 flex items-center justify-center border border-emerald-500/40 shadow-lg">
+                    <Trees className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-serif font-bold text-mayukha-cream">Jungle Theme Restaurant</h3>
+                    <span className="text-xs text-emerald-300 font-medium">Exotic Greenery & Forest Vibe</span>
+                  </div>
+                </div>
+                <p className="text-sm text-mayukha-sand leading-relaxed">
+                  Immerse yourself in lush botanical surroundings featuring realistic tree structures, wildlife decor, and rainforest aesthetic elements.
+                </p>
+                <ul className="space-y-2 text-xs text-mayukha-sand">
+                  <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-400" /> Immersive jungle decor & ambient soundscapes</li>
+                  <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-400" /> Kid-friendly seating & large family tables</li>
+                </ul>
+              </div>
+
+              <div className="relative z-10 pt-2">
+                <Link href="/reserve" className="inline-flex items-center text-xs font-bold text-mayukha-gold group-hover:translate-x-1 transition-transform">
+                  Reserve Jungle Seating <ChevronRight className="w-4 h-4 ml-1" />
+                </Link>
+              </div>
             </div>
           </div>
         </div>
@@ -185,14 +215,22 @@ export default async function Home() {
                   </p>
                 </div>
 
-                <div className="flex items-center justify-between pt-2 border-t border-mayukha-border/40">
+                <div className="flex items-center justify-between pt-2 border-t border-mayukha-border/40 gap-2">
                   <span className="font-serif font-bold text-xl text-mayukha-gold">₹{dish.price}</span>
-                  <Link
-                    href="/reserve"
-                    className="text-xs font-semibold px-3 py-1.5 rounded-lg bg-mayukha-card text-mayukha-cream hover:bg-mayukha-gold hover:text-mayukha-dark transition"
-                  >
-                    Order / Reserve
-                  </Link>
+                  <div className="flex items-center gap-1.5">
+                    <Link
+                      href="/menu"
+                      className="text-xs font-bold px-2.5 py-1.5 rounded-lg bg-mayukha-gold text-mayukha-dark hover:bg-mayukha-goldDark transition flex items-center gap-1 shadow"
+                    >
+                      <Bike className="w-3.5 h-3.5" /> Order Now
+                    </Link>
+                    <Link
+                      href="/reserve"
+                      className="text-xs font-semibold px-2 py-1.5 rounded-lg bg-mayukha-card text-mayukha-sand hover:text-mayukha-cream border border-mayukha-border/60 transition"
+                    >
+                      Book Table
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>

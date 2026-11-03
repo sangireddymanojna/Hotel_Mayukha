@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Utensils, Calendar, Users, Images, MapPin, Phone, Menu as MenuIcon, X, ShieldCheck } from 'lucide-react';
+import { Utensils, Calendar, Users, Images, MapPin, Phone, Menu as MenuIcon, X, ShieldCheck, Bike } from 'lucide-react';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);

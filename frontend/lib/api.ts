@@ -7,12 +7,29 @@ export const MOCK_CATEGORIES: MenuCategory[] = [
   { _id: 'cat-soups', name: 'Soups', slug: 'soups', displayOrder: 1, icon: 'Soup' },
   { _id: 'cat-starters', name: 'Starters', slug: 'starters', displayOrder: 2, icon: 'Drumstick' },
   { _id: 'cat-biryani', name: 'Biryanis', slug: 'biryani', displayOrder: 3, icon: 'Flame' },
-  { _id: 'cat-desserts', name: 'Desserts', slug: 'desserts', displayOrder: 4, icon: 'IceCream' },
-  { _id: 'cat-banquet', name: 'Banquet Booking Slots', slug: 'banquet-slots', displayOrder: 5, icon: 'Users' }
+  { _id: 'cat-curries', name: "Special Curries & Roti's", slug: 'special-curries', displayOrder: 4, icon: 'Utensils' },
+  { _id: 'cat-desserts', name: 'Desserts', slug: 'desserts', displayOrder: 5, icon: 'IceCream' },
+  { _id: 'cat-mocktails', name: 'Mocktails', slug: 'mocktails', displayOrder: 6, icon: 'Wine' },
+  { _id: 'cat-banquet', name: 'Banquet Booking Slots', slug: 'banquet-slots', displayOrder: 7, icon: 'Users' }
 ];
 
 export const MOCK_MENU_ITEMS: MenuItem[] = [
   // 1. Soups Category
+  {
+    _id: 'menu-sp-veg-1',
+    name: 'Veg Sweetcorn Soup',
+    slug: 'veg-sweetcorn-soup',
+    categoryId: 'cat-soups',
+    price: 170,
+    description: 'Velvety comforting broth with crushed sweet corn kernels, spring onions, diced vegetables, and subtle white pepper seasoning.',
+    isVeg: true,
+    spiceLevel: 0,
+    isAvailable: true,
+    isChefSpecial: true,
+    image: '/images/dishes/sweetcorn-soup.jpg',
+    allergenInfo: ['None'],
+    tags: ['Soup', 'Vegetarian', 'Chef Special', 'Comfort Food']
+  },
   {
     _id: 'menu-sp-1',
     name: 'Sweet Corn Chicken Soup',
@@ -24,7 +41,7 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     spiceLevel: 0,
     isAvailable: true,
     isChefSpecial: false,
-    image: 'https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=800&q=80',
+    image: '/images/dishes/sweet-corn-chicken-soup.jpg',
     allergenInfo: ['Egg'],
     tags: ['Soup', 'Comfort Food']
   },
@@ -39,12 +56,163 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     spiceLevel: 2,
     isAvailable: true,
     isChefSpecial: true,
-    image: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80',
+    image: '/images/dishes/mutton-paya-soup.jpg',
     allergenInfo: ['None'],
     tags: ['Authentic Broth', 'Hyderabadi Classic']
   },
+  {
+    _id: 'menu-sp-5',
+    name: 'Potato Vegetable Soup',
+    slug: 'potato-vegetable-soup',
+    categoryId: 'cat-soups',
+    price: 180,
+    description: 'Hearty wholesome broth loaded with tender diced potatoes, garden fresh green peas, sweet carrots, and fragrant herbs.',
+    isVeg: true,
+    spiceLevel: 1,
+    isAvailable: true,
+    isChefSpecial: true,
+    image: '/images/dishes/potato-vegetable-soup.jpg',
+    allergenInfo: ['None'],
+    tags: ['Soup', 'Vegetarian', 'Hearty', 'Comfort Food']
+  },
+  {
+    _id: 'menu-sp-6',
+    name: 'Creamy Pasta Veggie Soup',
+    slug: 'creamy-pasta-veggie-soup',
+    categoryId: 'cat-soups',
+    price: 210,
+    description: 'Rich and savory vegetable broth featuring tender rotini pasta, crisp carrots, green beans, and fresh herbs.',
+    isVeg: true,
+    spiceLevel: 1,
+    isAvailable: true,
+    isChefSpecial: true,
+    image: '/images/dishes/creamy-pasta-veggie-soup.jpg',
+    allergenInfo: ['Gluten'],
+    tags: ['Soup', 'Vegetarian', 'Pasta', 'Chef Special']
+  },
+  {
+    _id: 'menu-sp-7',
+    name: 'Classic Egg Drop Soup',
+    slug: 'egg-drop-soup',
+    categoryId: 'cat-soups',
+    price: 195,
+    description: 'Silky, flavorful golden broth with delicate ribbons of beaten eggs, garnished with freshly chopped scallions.',
+    isVeg: false,
+    spiceLevel: 0,
+    isAvailable: true,
+    isChefSpecial: false,
+    image: '/images/dishes/egg-drop-soup.jpg',
+    allergenInfo: ['Egg'],
+    tags: ['Soup', 'Egg Special', 'Comfort Food']
+  },
+  {
+    _id: 'menu-sp-8',
+    name: 'Creamy Shrimp Soup',
+    slug: 'creamy-shrimp-soup',
+    categoryId: 'cat-soups',
+    price: 280,
+    description: 'Rich, velvety cream broth simmered with succulent jumbo prawns, fresh spinach leaves, garlic, and aromatic herbs.',
+    isVeg: false,
+    spiceLevel: 1,
+    isAvailable: true,
+    isChefSpecial: true,
+    image: '/images/dishes/creamy-shrimp-soup.png',
+    allergenInfo: ['Shellfish', 'Dairy'],
+    tags: ['Soup', 'Seafood', 'Chef Special', 'Rich & Creamy']
+  },
+  {
+    _id: 'menu-sp-9',
+    name: 'French Seafood Stew',
+    slug: 'french-seafood-stew',
+    categoryId: 'cat-soups',
+    price: 320,
+    description: 'Classic French bouillabaisse-style seafood stew loaded with tender prawns, mussels, tomatoes, and aromatic herbs, served with toasted rustic bread.',
+    isVeg: false,
+    spiceLevel: 1,
+    isAvailable: true,
+    isChefSpecial: true,
+    image: '/images/dishes/french-seafood-stew.jpg',
+    allergenInfo: ['Shellfish', 'Gluten'],
+    tags: ['Soup', 'Seafood', 'French Classic', 'Gourmet']
+  },
+
 
   // 2. Starters Category
+  {
+    _id: 'menu-str-vm',
+    name: 'Veg Manchuria Gravy',
+    slug: 'veg-manchuria-gravy',
+    categoryId: 'cat-starters',
+    price: 270,
+    description: 'Golden fried mixed vegetable dumplings simmered in rich tangy garlic soy Manchurian sauce topped with fresh spring onions.',
+    isVeg: true,
+    spiceLevel: 2,
+    isAvailable: true,
+    isChefSpecial: true,
+    image: '/images/dishes/veg-manchuria.jpg',
+    allergenInfo: ['Soy', 'Gluten'],
+    tags: ['Starter', 'Vegetarian', 'Indo-Chinese', 'Bestseller']
+  },
+  {
+    _id: 'menu-str-gc',
+    name: 'Mayukha Special Grilled Chicken',
+    slug: 'mayukha-special-grilled-chicken',
+    categoryId: 'cat-starters',
+    price: 410,
+    description: 'Juicy chicken thighs marinated in smoked paprika, herbs, and lemon zest, slow-grilled over open charcoal flames served with mint chutney and lime.',
+    isVeg: false,
+    spiceLevel: 2,
+    isAvailable: true,
+    isChefSpecial: true,
+    image: '/images/dishes/grilled-chicken.jpg',
+    allergenInfo: ['None'],
+    tags: ['Starter', 'Barbeque', 'Grill Special', 'Chef Special']
+  },
+  {
+    _id: 'menu-str-cm',
+    name: 'Crispy Chicken Manchurian Gravy',
+    slug: 'crispy-chicken-manchurian',
+    categoryId: 'cat-starters',
+    price: 340,
+    description: 'Bite-sized crispy chicken fritters tossed in thick tangy garlic-soy Manchurian sauce topped with fresh spring onions and red chillies.',
+    isVeg: false,
+    spiceLevel: 2,
+    isAvailable: true,
+    isChefSpecial: true,
+    image: '/images/dishes/chicken-manchuria.jpg',
+    allergenInfo: ['Soy', 'Gluten'],
+    tags: ['Starter', 'Indo-Chinese', 'Chicken', 'Bestseller']
+  },
+  {
+    _id: 'menu-str-cc',
+    name: 'Special Indo-Chinese Chilli Chicken',
+    slug: 'special-chilli-chicken',
+    categoryId: 'cat-starters',
+    price: 350,
+    description: 'Deep-fried marinated chicken chunks tossed with bell peppers, green chillies, onions, dark soy sauce, and sesame crunch.',
+    isVeg: false,
+    spiceLevel: 3,
+    isAvailable: true,
+    isChefSpecial: true,
+    image: '/images/dishes/chilli-chicken.jpg',
+    allergenInfo: ['Soy', 'Gluten', 'Sesame'],
+    tags: ['Starter', 'Indo-Chinese', 'Spicy', 'Chef Special']
+  },
+  {
+    _id: 'menu-str-gbm',
+    name: 'Sautéed Garlic Butter Mushrooms',
+    slug: 'garlic-butter-mushroom',
+    categoryId: 'cat-starters',
+    price: 310,
+    description: 'Fresh button mushrooms pan-sautéed in rich golden garlic butter, cracked black pepper, and fresh parsley herbs.',
+    isVeg: true,
+    spiceLevel: 1,
+    isAvailable: true,
+    isChefSpecial: true,
+    image: '/images/dishes/garlic-butter-mushroom.jpg',
+    allergenInfo: ['Dairy'],
+    tags: ['Starter', 'Vegetarian', 'Garlic Butter', 'Chef Special']
+  },
   {
     _id: 'menu-str-1',
     name: 'Apollo Fish Fry',
@@ -56,7 +224,7 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     spiceLevel: 3,
     isAvailable: true,
     isChefSpecial: true,
-    image: 'https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=800&q=80',
+    image: '/images/dishes/apollo-fish-fry.jpg',
     allergenInfo: ['Seafood', 'Dairy'],
     tags: ['Hyderabadi Special', 'Bestseller', 'Spicy']
   },
@@ -71,7 +239,7 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     spiceLevel: 2,
     isAvailable: true,
     isChefSpecial: false,
-    image: 'https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=800&q=80',
+    image: '/images/dishes/crispy-gobi-65.jpg',
     allergenInfo: ['Gluten'],
     tags: ['Vegetarian', 'Starter']
   },
@@ -86,7 +254,7 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     spiceLevel: 2,
     isAvailable: true,
     isChefSpecial: true,
-    image: 'https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=800&q=80',
+    image: '/images/dishes/tangdi-kebab.png',
     allergenInfo: ['Dairy', 'Nuts'],
     tags: ['Starter', 'Tandoor']
   },
@@ -101,27 +269,132 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     spiceLevel: 3,
     isAvailable: true,
     isChefSpecial: true,
-    image: 'https://images.unsplash.com/photo-1565680018434-b513d5e5fd47?auto=format&fit=crop&w=800&q=80',
+    image: '/images/dishes/crispy-loose-prawns.jpg',
     allergenInfo: ['Seafood'],
     tags: ['Seafood', 'Spicy']
   },
   {
     _id: 'menu-str-5',
-    name: 'Achari Paneer Tikka',
-    slug: 'achari-paneer-tikka',
+    name: 'Special Barbeque Paneer Tikka',
+    slug: 'paneer-tikka-barbeque',
     categoryId: 'cat-starters',
-    price: 310,
-    description: 'Cottage cheese marinated in tangy pickling spices, bell peppers, and grilled over charcoal flames.',
+    price: 330,
+    description: 'Fresh cottage cheese cubes, onions, and bell peppers marinated in rich smoky tandoori spices, skewered and grilled over charcoal embers.',
     isVeg: true,
     spiceLevel: 2,
     isAvailable: true,
-    isChefSpecial: false,
-    image: 'https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?auto=format&fit=crop&w=800&q=80',
+    isChefSpecial: true,
+    image: '/images/dishes/paneer-tikka-barbeque.jpg',
     allergenInfo: ['Dairy'],
-    tags: ['Vegetarian', 'Achari']
+    tags: ['Vegetarian', 'Tandoor', 'Barbeque', 'Chef Special']
+  },
+  {
+    _id: 'menu-str-6',
+    name: 'Mayukha Special Chicken Lollipop (6 Pcs)',
+    slug: 'mayukha-special-chicken-lollipop',
+    categoryId: 'cat-starters',
+    price: 390,
+    description: 'Crispy fried frenched chicken wing lollipops tossed in spicy garlic red sauce, served with lemon wedges and mint dip.',
+    isVeg: false,
+    spiceLevel: 2,
+    isAvailable: true,
+    isChefSpecial: true,
+    image: '/images/dishes/chicken-lollipop.jpg',
+    allergenInfo: ['Gluten'],
+    tags: ['Starter', 'Chicken Special', 'Bestseller']
+  },
+  {
+    _id: 'menu-str-7',
+    name: 'Special Mutton Ghee Roast',
+    slug: 'special-mutton-ghee-roast',
+    categoryId: 'cat-starters',
+    price: 450,
+    description: 'Succulent mutton chunks slow-roasted in pure deshi ghee, crushed Mangalorean spice mix, garlic, and curry leaves.',
+    isVeg: false,
+    spiceLevel: 3,
+    isAvailable: true,
+    isChefSpecial: true,
+    image: '/images/dishes/mutton-ghee-roast.jpg',
+    allergenInfo: ['Dairy'],
+    tags: ['Starter', 'Mutton Special', 'Ghee Roast', 'Chef Special']
+  },
+  {
+    _id: 'menu-str-8',
+    name: 'Crispy Chilli Babycorn',
+    slug: 'crispy-chilli-babycorn',
+    categoryId: 'cat-starters',
+    price: 290,
+    description: 'Crispy fried tender baby corn tossed in dark soy sauce, spicy garlic chillies, capsicum, and fresh coriander herbs.',
+    isVeg: true,
+    spiceLevel: 2,
+    isAvailable: true,
+    isChefSpecial: true,
+    image: '/images/dishes/chilli-babycorn.jpg',
+    allergenInfo: ['Soy', 'Gluten'],
+    tags: ['Vegetarian', 'Indo-Chinese', 'Starter', 'Crispy']
   },
 
-  // 3. Biryanis Category (6 Varieties)
+  // 3. Biryanis Category (6 Distinct Biryanis with authentic Biryani photography)
+  {
+    _id: 'menu-bir-ngb',
+    name: 'Royal Hyderabadi Nalli Ghosht Biryani',
+    slug: 'royal-nalli-ghosht-biryani',
+    categoryId: 'cat-biryani',
+    price: 540,
+    description: 'Slow-cooked juicy lamb shank (Nalli) in rich gravy layered over fragrant saffron basmati rice with whole spices and fresh herbs.',
+    isVeg: false,
+    spiceLevel: 2,
+    isAvailable: true,
+    isChefSpecial: true,
+    image: '/images/dishes/nalli-ghosht-biryani.jpg',
+    allergenInfo: ['Dairy'],
+    tags: ['Biryani', 'Nalli Ghosht', 'Royal', 'Chef Special', 'Bestseller']
+  },
+  {
+    _id: 'menu-bir-mvp',
+    name: 'Special Mixed Veg Pulav',
+    slug: 'special-mixed-veg-pulav',
+    categoryId: 'cat-biryani',
+    price: 310,
+    description: 'Fragrant basmati rice cooked with garden-fresh vegetables, whole spices, fried onions, mint, and pure ghee served in an earthenware bowl.',
+    isVeg: true,
+    spiceLevel: 1,
+    isAvailable: true,
+    isChefSpecial: true,
+    image: '/images/dishes/mixed-veg-pulav.jpg',
+    allergenInfo: ['None'],
+    tags: ['Pulav', 'Vegetarian', 'Chef Special', 'Comfort Food']
+  },
+  {
+    _id: 'menu-bir-mb',
+    name: 'Mayukha Special Mixed Royal Biryani',
+    slug: 'mayukha-special-mixed-biryani',
+    categoryId: 'cat-biryani',
+    price: 520,
+    description: 'Royal feast of basmati rice dum-cooked with tender mutton shanks, juicy chicken pieces, roasted cashews, raisins, and hard-boiled eggs.',
+    isVeg: false,
+    spiceLevel: 2,
+    isAvailable: true,
+    isChefSpecial: true,
+    image: '/images/dishes/mayukha-special-mixed-biryani.jpg',
+    allergenInfo: ['Nuts', 'Egg'],
+    tags: ['Biryani', 'Royal Feast', 'Chef Special', 'Bestseller']
+  },
+  {
+    _id: 'menu-bir-c65',
+    name: 'Spicy Chicken 65 Dum Biryani',
+    slug: 'spicy-chicken-65-biryani',
+    categoryId: 'cat-biryani',
+    price: 420,
+    description: 'Crispy spicy Hyderabadi Chicken 65 pieces layered over saffron basmati rice with aromatic biryani spices and sliced boiled egg.',
+    isVeg: false,
+    spiceLevel: 3,
+    isAvailable: true,
+    isChefSpecial: true,
+    image: '/images/dishes/spicy-chicken-65-biryani.jpg',
+    allergenInfo: ['Egg', 'Gluten'],
+    tags: ['Biryani', 'Chicken 65', 'Spicy', 'Chef Special']
+  },
   {
     _id: 'menu-bir-1',
     name: 'Hyderabadi Special Chicken Dum Biryani',
@@ -133,7 +406,7 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     spiceLevel: 2,
     isAvailable: true,
     isChefSpecial: true,
-    image: 'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=800&q=80',
+    image: '/images/dishes/hyderabadi-chicken-dum-biryani.jpg',
     allergenInfo: ['None'],
     tags: ['Bestseller', 'Chef Special', 'Dum Biryani']
   },
@@ -148,7 +421,7 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     spiceLevel: 2,
     isAvailable: true,
     isChefSpecial: true,
-    image: 'https://images.unsplash.com/photo-1633945274405-b6c8069047b0?auto=format&fit=crop&w=800&q=80',
+    image: '/images/dishes/mutton-dum-biryani.png',
     allergenInfo: ['Dairy'],
     tags: ['Mutton', 'Royal', 'Dum Biryani']
   },
@@ -163,7 +436,7 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     spiceLevel: 2,
     isAvailable: true,
     isChefSpecial: true,
-    image: 'https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=800&q=80',
+    image: '/images/dishes/special-boneless-chicken-biryani.jpg',
     allergenInfo: ['Dairy'],
     tags: ['Boneless', 'Chef Special']
   },
@@ -178,7 +451,7 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     spiceLevel: 3,
     isAvailable: true,
     isChefSpecial: true,
-    image: 'https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&fit=crop&w=800&q=80',
+    image: '/images/dishes/ulavacharu-chicken-biryani.png',
     allergenInfo: ['None'],
     tags: ['Regional Special', 'Ulavacharu', 'Spicy']
   },
@@ -193,7 +466,7 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     spiceLevel: 1,
     isAvailable: true,
     isChefSpecial: false,
-    image: 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=800&q=80',
+    image: '/images/dishes/paneer-tikka-dum-biryani.jpg',
     allergenInfo: ['Dairy'],
     tags: ['Vegetarian', 'Paneer Biryani']
   },
@@ -208,12 +481,179 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     spiceLevel: 2,
     isAvailable: true,
     isChefSpecial: false,
-    image: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=80',
+    image: '/images/dishes/egg-dum-biryani.jpg',
     allergenInfo: ['Egg'],
     tags: ['Egg Special', 'Dum Biryani']
   },
+  {
+    _id: 'menu-bir-7',
+    name: 'Mushroom Dum Biryani',
+    slug: 'mushroom-dum-biryani',
+    categoryId: 'cat-biryani',
+    price: 310,
+    description: 'Fresh button mushrooms and green peas sauteed in biryani spices, dum-cooked with fragrant long-grain basmati rice.',
+    isVeg: true,
+    spiceLevel: 1,
+    isAvailable: true,
+    isChefSpecial: false,
+    image: '/images/dishes/mushroom-biryani.jpg',
+    allergenInfo: ['None'],
+    tags: ['Vegetarian', 'Mushroom', 'Biryani']
+  },
 
-  // 4. Desserts Category
+  // 4. Special Curries/Gravies Category
+  {
+    _id: 'menu-curry-1',
+    name: 'Veg Paneer Butter Masala',
+    slug: 'veg-paneer-butter-masala',
+    categoryId: 'cat-curries',
+    price: 330,
+    description: 'Fresh cottage cheese cubes simmered in rich creamy tomato butter sauce with cashew paste and aromatic spices.',
+    isVeg: true,
+    spiceLevel: 1,
+    isAvailable: true,
+    isChefSpecial: true,
+    image: '/images/dishes/paneer-butter-masala.jpg',
+    allergenInfo: ['Dairy', 'Nuts'],
+    tags: ['Special Curry', 'Vegetarian', 'Chef Special']
+  },
+  {
+    _id: 'menu-curry-2',
+    name: 'Special Mutton Masala Curry',
+    slug: 'special-mutton-masala-curry',
+    categoryId: 'cat-curries',
+    price: 440,
+    description: 'Tender mutton bone-in pieces slow-cooked in thick spicy Hyderabadi onion-tomato gravy with roasted whole spices.',
+    isVeg: false,
+    spiceLevel: 3,
+    isAvailable: true,
+    isChefSpecial: true,
+    image: '/images/dishes/special-mutton-masala-curry.jpg',
+    allergenInfo: ['None'],
+    tags: ['Special Curry', 'Non-Veg', 'Chef Special', 'Spicy']
+  },
+  {
+    _id: 'menu-curry-3',
+    name: 'Special Chicken Curry',
+    slug: 'special-chicken-curry',
+    categoryId: 'cat-curries',
+    price: 380,
+    description: 'Traditional slow-simmered chicken curry cooked in aromatic brass handi with roasted spices, ginger, and fresh coriander.',
+    isVeg: false,
+    spiceLevel: 2,
+    isAvailable: true,
+    isChefSpecial: true,
+    image: '/images/dishes/special-chicken-curry.jpg',
+    allergenInfo: ['None'],
+    tags: ['Special Curry', 'Non-Veg', 'Chef Special']
+  },
+  {
+    _id: 'menu-curry-4',
+    name: 'Veg Mushroom Masala',
+    slug: 'veg-mushroom-masala',
+    categoryId: 'cat-curries',
+    price: 320,
+    description: 'Fresh sliced button mushrooms cooked in rich spiced tomato-onion gravy garnished with green coriander herbs.',
+    isVeg: true,
+    spiceLevel: 2,
+    isAvailable: true,
+    isChefSpecial: false,
+    image: '/images/dishes/mushroom-masala.png',
+    allergenInfo: ['None'],
+    tags: ['Special Curry', 'Vegetarian', 'Mushroom']
+  },
+  {
+    _id: 'menu-curry-afc',
+    name: 'Authentic Andhra Style Fish Curry (Chepala Pulusu)',
+    slug: 'andhra-style-fish-curry',
+    categoryId: 'cat-curries',
+    price: 390,
+    description: 'Fresh river fish steaks simmered in tangy tamarind, roasted Guntur red chillies, onions, garlic, and aromatic curry leaves.',
+    isVeg: false,
+    spiceLevel: 3,
+    isAvailable: true,
+    isChefSpecial: true,
+    image: '/images/dishes/andhra-fish-curry.jpg',
+    allergenInfo: ['Seafood'],
+    tags: ['Special Curry', 'Andhra Special', 'Seafood', 'Spicy']
+  },
+  {
+    _id: 'menu-curry-sec',
+    name: 'Special Hyderabadi Spicy Egg Curry',
+    slug: 'spicy-egg-curry',
+    categoryId: 'cat-curries',
+    price: 240,
+    description: 'Golden shallow-fried hard-boiled eggs simmered in rich spiced onion-tomato gravy with roasted whole spices and fresh coriander.',
+    isVeg: false,
+    spiceLevel: 2,
+    isAvailable: true,
+    isChefSpecial: true,
+    image: '/images/dishes/spicy-egg-curry.jpg',
+    allergenInfo: ['Egg'],
+    tags: ['Special Curry', 'Egg Special', 'Spicy']
+  },
+  {
+    _id: 'menu-curry-pp',
+    name: 'Authentic Dhaba Style Palak Paneer',
+    slug: 'dhaba-style-palak-paneer',
+    categoryId: 'cat-curries',
+    price: 340,
+    description: 'Soft cottage cheese cubes simmered in vibrant garlic-infused spinach puree with fresh cream, butter, and authentic Indian spices.',
+    isVeg: true,
+    spiceLevel: 1,
+    isAvailable: true,
+    isChefSpecial: true,
+    image: '/images/dishes/palak-paneer.jpg',
+    allergenInfo: ['Dairy'],
+    tags: ['Special Curry', 'Vegetarian', 'Palak Paneer', 'Chef Special']
+  },
+  {
+    _id: 'menu-curry-pc',
+    name: 'Mayukha Special Prawns Curry (Royyala Kura)',
+    slug: 'special-prawns-curry',
+    categoryId: 'cat-curries',
+    price: 460,
+    description: 'Fresh ocean prawns cooked in aromatic coconut tamarind gravy with curry leaves, green chillies, and crushed black pepper.',
+    isVeg: false,
+    spiceLevel: 2,
+    isAvailable: true,
+    isChefSpecial: true,
+    image: '/images/dishes/prawns-curry.png',
+    allergenInfo: ['Seafood'],
+    tags: ['Special Curry', 'Seafood', 'Prawns', 'Chef Special']
+  },
+  {
+    _id: 'menu-curry-rr',
+    name: 'Butter Rumali Roti (2 Pcs)',
+    slug: 'butter-rumali-roti',
+    categoryId: 'cat-curries',
+    price: 70,
+    description: 'Ultra-thin, soft handkerchief-style Indian flatbread baked on an inverted tawa and brushed with fresh butter.',
+    isVeg: true,
+    spiceLevel: 0,
+    isAvailable: true,
+    isChefSpecial: true,
+    image: '/images/dishes/rumali-roti.jpg',
+    allergenInfo: ['Gluten', 'Dairy'],
+    tags: ['Indian Bread', 'Vegetarian', 'Tawa Special']
+  },
+  {
+    _id: 'menu-curry-bn',
+    name: 'Special Butter Naan',
+    slug: 'special-butter-naan',
+    categoryId: 'cat-curries',
+    price: 60,
+    description: 'Soft tandoor-baked leavened Indian flatbread brushed generously with fresh creamy butter, served hot with gravy.',
+    isVeg: true,
+    spiceLevel: 0,
+    isAvailable: true,
+    isChefSpecial: true,
+    image: '/images/dishes/butter-naan.jpg',
+    allergenInfo: ['Gluten', 'Dairy'],
+    tags: ['Indian Bread', 'Vegetarian', 'Tandoor Special', 'Bestseller']
+  },
+
+  // 5. Desserts Category
   {
     _id: 'menu-des-1',
     name: 'Double Ka Meetha',
@@ -225,7 +665,7 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     spiceLevel: 0,
     isAvailable: true,
     isChefSpecial: true,
-    image: 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=800&q=80',
+    image: '/images/dishes/double-ka-meetha.png',
     allergenInfo: ['Dairy', 'Nuts', 'Gluten'],
     tags: ['Dessert', 'Hyderabadi Classic']
   },
@@ -240,7 +680,7 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     spiceLevel: 0,
     isAvailable: true,
     isChefSpecial: true,
-    image: 'https://images.unsplash.com/photo-1579372786545-d24232daf58c?auto=format&fit=crop&w=800&q=80',
+    image: '/images/dishes/qubani-ka-meetha.jpg',
     allergenInfo: ['Dairy', 'Nuts'],
     tags: ['Hyderabadi Classic', 'Dessert']
   },
@@ -255,7 +695,7 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     spiceLevel: 0,
     isAvailable: true,
     isChefSpecial: false,
-    image: 'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=800&q=80',
+    image: '/images/dishes/gulab-jamun-rabri.jpg',
     allergenInfo: ['Dairy', 'Gluten', 'Nuts'],
     tags: ['Dessert', 'Sweet']
   },
@@ -270,12 +710,89 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     spiceLevel: 0,
     isAvailable: true,
     isChefSpecial: false,
-    image: 'https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=800&q=80',
+    image: '/images/dishes/mango-lassi.png',
     allergenInfo: ['Dairy', 'Nuts'],
     tags: ['Beverage', 'Cooler']
   },
+  {
+    _id: 'menu-des-5',
+    name: 'Royal Saffron Rasmalai (2 Pcs)',
+    slug: 'royal-saffron-rasmalai',
+    categoryId: 'cat-desserts',
+    price: 190,
+    description: 'Soft flattened cottage cheese patties soaked in thick cardamom saffron milk, garnished with pistachios, silver leaf, and rose petals.',
+    isVeg: true,
+    spiceLevel: 0,
+    isAvailable: true,
+    isChefSpecial: true,
+    image: '/images/dishes/rasmalai.jpg',
+    allergenInfo: ['Dairy', 'Nuts'],
+    tags: ['Dessert', 'Royal Sweet', 'Chef Special']
+  },
+  {
+    _id: 'menu-des-6',
+    name: 'Special Dry Fruit Lassi',
+    slug: 'special-dry-fruit-lassi',
+    categoryId: 'cat-desserts',
+    price: 150,
+    description: 'Thick rich sweet yogurt blend garnished generously with chopped cashews, pistachios, almonds, saffron, and cardamoms.',
+    isVeg: true,
+    spiceLevel: 0,
+    isAvailable: true,
+    isChefSpecial: true,
+    image: '/images/dishes/dry-fruit-lassi.png',
+    allergenInfo: ['Dairy', 'Nuts'],
+    tags: ['Beverage', 'Lassi', 'Dry Fruit', 'Chef Special']
+  },
 
-  // 5. Banquet Booking Slots Category
+  // 6. Mocktails Category
+  {
+    _id: 'menu-mck-1',
+    name: 'Blue Mojito Mocktail',
+    slug: 'blue-mojito-mocktail',
+    categoryId: 'cat-mocktails',
+    price: 160,
+    description: 'Refreshing ocean blue mocktail infused with fresh mint leaves, lime juice, blue curacao syrup, and chilled sparkling soda.',
+    isVeg: true,
+    spiceLevel: 0,
+    isAvailable: true,
+    isChefSpecial: true,
+    image: '/images/dishes/blue-mojito-mocktail.png',
+    allergenInfo: ['None'],
+    tags: ['Mocktail', 'Beverage', 'Bestseller', 'Refreshing']
+  },
+  {
+    _id: 'menu-mck-2',
+    name: 'Strawberry Lemonade',
+    slug: 'strawberry-lemonade',
+    categoryId: 'cat-mocktails',
+    price: 170,
+    description: 'Hand-crafted sparkling lemonade infused with fresh crushed strawberries, mint leaves, lemon wedges, and ice splash.',
+    isVeg: true,
+    spiceLevel: 0,
+    isAvailable: true,
+    isChefSpecial: false,
+    image: '/images/dishes/strawberry-lemonade.jpg',
+    allergenInfo: ['None'],
+    tags: ['Mocktail', 'Beverage', 'Fruity', 'Cooler']
+  },
+  {
+    _id: 'menu-mck-3',
+    name: 'Lavender Mojito',
+    slug: 'lavender-mojito',
+    categoryId: 'cat-mocktails',
+    price: 180,
+    description: 'Elegant floral mocktail crafted with French lavender syrup, fresh crushed mint, lemon slices, and sparkling soda with sugar-rimmed glass.',
+    isVeg: true,
+    spiceLevel: 0,
+    isAvailable: true,
+    isChefSpecial: true,
+    image: '/images/dishes/lavender-mojito.jpg',
+    allergenInfo: ['None'],
+    tags: ['Mocktail', 'Beverage', 'Chef Special', 'Floral']
+  },
+
+  // 7. Banquet Booking Slots Category
   {
     _id: 'menu-bnq-1',
     name: 'KPHB Grand Banquet Evening Slot (50 - 200 Guests)',
@@ -356,7 +873,10 @@ export const MOCK_TESTIMONIALS: Testimonial[] = [
 // API Functions with automatic fallback
 export async function fetchCategories(): Promise<MenuCategory[]> {
   try {
-    const res = await fetch(`${API_BASE}/menu/categories`, { cache: 'no-store' });
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 600);
+    const res = await fetch(`${API_BASE}/menu/categories`, { cache: 'no-store', signal: controller.signal });
+    clearTimeout(timer);
     if (!res.ok) throw new Error('API error');
     const json = await res.json();
     return json.data;
@@ -373,7 +893,10 @@ export async function fetchMenuItems(params?: { category?: string; veg?: string;
     if (params?.search) query.append('search', params.search);
     if (params?.chefSpecial) query.append('chefSpecial', params.chefSpecial);
 
-    const res = await fetch(`${API_BASE}/menu?${query.toString()}`, { cache: 'no-store' });
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 600);
+    const res = await fetch(`${API_BASE}/menu?${query.toString()}`, { cache: 'no-store', signal: controller.signal });
+    clearTimeout(timer);
     if (!res.ok) throw new Error('API error');
     const json = await res.json();
     return json.data;

@@ -80,3 +80,32 @@ export interface DashboardStats {
   recentReservations: Reservation[];
   recentBanquets: BanquetEnquiry[];
 }
+
+export interface OrderItem {
+  dishId: string;
+  name: string;
+  price: number;
+  quantity: number;
+  image?: string;
+  isVeg?: boolean;
+}
+
+export interface DeliveryOrder {
+  _id?: string;
+  orderId: string;
+  customerName: string;
+  phone: string;
+  email?: string;
+  deliveryArea: string;
+  deliveryAddress: string;
+  specialInstructions?: string;
+  paymentMethod: 'Cash on Delivery' | 'UPI on Delivery' | 'Online Payment';
+  items: OrderItem[];
+  subtotal: number;
+  deliveryFee: number;
+  tax: number;
+  totalAmount: number;
+  status: 'Received' | 'Preparing in Kitchen' | 'Out for Delivery' | 'Delivered' | 'Cancelled';
+  estimatedDeliveryMinutes: number;
+  createdAt?: string;
+}

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import SparklesBackground from "@/components/ui/SparklesBackground";
 
 export const metadata: Metadata = {
   title: "Hotel Mayukha | Fine Dining, Aqua & Jungle Theme Restaurant | Hyderabad",
@@ -25,7 +24,6 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className="min-h-screen bg-mayukha-dark text-mayukha-cream antialiased selection:bg-mayukha-gold selection:text-mayukha-dark relative overflow-x-hidden">
-        <SparklesBackground />
         <div className="relative z-10">
           {children}
         </div>

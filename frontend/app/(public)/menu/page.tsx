@@ -3,33 +3,33 @@
 import { useState, useEffect } from 'react';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
-import { fetchCategories, fetchMenuItems } from '@/lib/api';
+import { fetchCategories, fetchMenuItems, MOCK_CATEGORIES, MOCK_MENU_ITEMS } from '@/lib/api';
 import { MenuItem, MenuCategory } from '@/types';
-import { Search, Flame, Filter, Utensils, X, Clock, AlertTriangle, CheckCircle, Calendar, Users } from 'lucide-react';
+import { Search, Flame, Filter, Utensils, X, Clock, AlertTriangle, CheckCircle, Calendar, Users, Bike, ShoppingBag } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import OrderDeliveryModal from '@/components/ui/OrderDeliveryModal';
 
 export default function MenuPage() {
-  const [categories, setCategories] = useState<MenuCategory[]>([]);
-  const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [categories, setCategories] = useState<MenuCategory[]>(MOCK_CATEGORIES);
+  const [menuItems, setMenuItems] = useState<MenuItem[]>(MOCK_MENU_ITEMS);
+  const [loading, setLoading] = useState(false);
   
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [selectedDiet, setSelectedDiet] = useState<'all' | 'veg' | 'non-veg' | 'special'>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
   
   const [activeModalItem, setActiveModalItem] = useState<MenuItem | null>(null);
+  const [orderDeliveryDish, setOrderDeliveryDish] = useState<MenuItem | null>(null);
 
   useEffect(() => {
     async function loadData() {
-      setLoading(true);
       const [catsData, itemsData] = await Promise.all([
         fetchCategories(),
         fetchMenuItems()
       ]);
-      setCategories(catsData);
-      setMenuItems(itemsData);
-      setLoading(false);
+      if (catsData && catsData.length > 0) setCategories(catsData);
+      if (itemsData && itemsData.length > 0) setMenuItems(itemsData);
     }
     loadData();
   }, []);
@@ -62,7 +62,7 @@ export default function MenuPage() {
   });
 
   return (
-    <div className="min-h-screen flex flex-col bg-mayukha-dark">
+    <div className="min-h-screen flex flex-col bg-transparent">
       <Header />
 
       {/* Header Title Section */}
@@ -201,22 +201,29 @@ export default function MenuPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredItems.map((item) => {
               const isBanquetSlot = (item.categoryId as any) === 'cat-banquet' || item.tags?.includes('Banquet Hall');
+              const isDrink = item.tags?.includes('Mocktail') || item.tags?.includes('Beverage') || item.tags?.includes('Lassi') || item.tags?.includes('Cooler') || (item.categoryId as any) === 'cat-mocktails' || item.slug.includes('mojito') || item.slug.includes('lemonade') || item.slug.includes('lassi');
               
               return (
                 <div
                   key={item._id}
                   onClick={() => setActiveModalItem(item)}
-                  className={`bg-mayukha-surface rounded-2xl overflow-hidden border ${
+                  className={`radiant-card card-shine rounded-2xl overflow-hidden border ${
                     isBanquetSlot ? 'border-mayukha-gold/50 shadow-gold-glow' : 'border-mayukha-border/60'
                   } hover:border-mayukha-gold transition duration-300 flex flex-col justify-between group cursor-pointer shadow-lg hover:-translate-y-1`}
                 >
                   <div>
-                    <div className="relative h-48 w-full overflow-hidden bg-mayukha-card">
+                    <div className="relative h-64 w-full overflow-hidden bg-mayukha-card">
                       <Image
                         src={item.image}
                         alt={item.name}
                         fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                        className={`group-hover:scale-105 transition-transform duration-500 ${
+                          isDrink
+                            ? 'object-contain p-2 object-top bg-gradient-to-b from-mayukha-dark/95 via-mayukha-card to-mayukha-surface'
+                            : item.slug === 'apollo-fish-fry'
+                            ? 'object-bottom object-cover'
+                            : 'object-center object-cover'
+                        }`}
                       />
                       {isBanquetSlot ? (
                         <div className="absolute top-3 left-3 bg-mayukha-gold text-mayukha-dark font-bold px-2.5 py-1 rounded text-[10px] uppercase tracking-wider shadow">
@@ -255,7 +262,7 @@ export default function MenuPage() {
                     </div>
                   </div>
 
-                  <div className="px-5 pb-5 pt-3 border-t border-mayukha-border/40 flex items-center justify-between">
+                  <div className="px-5 pb-5 pt-3 border-t border-mayukha-border/40 flex items-center justify-between gap-2">
                     <span className="font-serif font-bold text-xl text-mayukha-gold">₹{item.price}</span>
                     {isBanquetSlot ? (
                       <Link
@@ -266,9 +273,21 @@ export default function MenuPage() {
                         Book Banquet Slot →
                       </Link>
                     ) : (
-                      <span className="text-xs font-semibold px-3 py-1.5 rounded-lg bg-mayukha-card text-mayukha-cream group-hover:bg-mayukha-gold group-hover:text-mayukha-dark transition">
-                        View Details
-                      </span>
+                      <div className="flex items-center gap-2">
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setOrderDeliveryDish(item);
+                          }}
+                          className="text-xs font-bold px-3 py-1.5 rounded-lg bg-gradient-to-r from-mayukha-gold to-mayukha-goldDark text-mayukha-dark hover:brightness-110 shadow-gold-glow transition flex items-center gap-1.5"
+                        >
+                          <Bike className="w-3.5 h-3.5" /> Order Now
+                        </button>
+                        <span className="text-xs font-semibold px-2.5 py-1.5 rounded-lg bg-mayukha-card text-mayukha-sand hover:text-mayukha-cream border border-mayukha-border/60 transition hidden sm:inline-block">
+                          Details
+                        </span>
+                      </div>
                     )}
                   </div>
                 </div>
@@ -289,12 +308,18 @@ export default function MenuPage() {
               <X className="w-5 h-5" />
             </button>
 
-            <div className="relative h-60 w-full">
+            <div className="relative h-80 w-full bg-mayukha-card">
               <Image
                 src={activeModalItem.image}
                 alt={activeModalItem.name}
                 fill
-                className="object-cover"
+                className={`${
+                  activeModalItem.tags?.includes('Mocktail') || activeModalItem.tags?.includes('Beverage') || activeModalItem.tags?.includes('Lassi') || activeModalItem.tags?.includes('Cooler') || (activeModalItem.categoryId as any) === 'cat-mocktails' || activeModalItem.slug.includes('mojito') || activeModalItem.slug.includes('lemonade') || activeModalItem.slug.includes('lassi')
+                    ? 'object-contain p-3 object-top bg-gradient-to-b from-mayukha-dark/95 via-mayukha-card to-mayukha-surface'
+                    : activeModalItem.slug === 'apollo-fish-fry'
+                    ? 'object-bottom object-cover'
+                    : 'object-center object-cover'
+                }`}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-mayukha-surface via-transparent to-transparent" />
             </div>
@@ -314,10 +339,10 @@ export default function MenuPage() {
                 {activeModalItem.description}
               </p>
 
-              <div className="pt-3 flex gap-3">
+              <div className="pt-3 flex flex-col sm:flex-row gap-3">
                 <button
                   onClick={() => setActiveModalItem(null)}
-                  className="flex-1 py-3 rounded-xl bg-mayukha-card text-mayukha-sand font-semibold text-sm hover:text-mayukha-cream transition"
+                  className="py-3 px-4 rounded-xl bg-mayukha-card text-mayukha-sand font-semibold text-sm hover:text-mayukha-cream transition"
                 >
                   Close
                 </button>
@@ -329,18 +354,37 @@ export default function MenuPage() {
                     Request Banquet Quote
                   </Link>
                 ) : (
-                  <Link
-                    href="/reserve"
-                    className="flex-1 py-3 text-center rounded-xl bg-mayukha-gold text-mayukha-dark font-bold text-sm shadow-gold-glow hover:bg-mayukha-goldDark transition"
-                  >
-                    Book Table for Dish
-                  </Link>
+                  <>
+                    <button
+                      onClick={() => {
+                        const dishToOrder = activeModalItem;
+                        setActiveModalItem(null);
+                        setOrderDeliveryDish(dishToOrder);
+                      }}
+                      className="flex-1 py-3 rounded-xl bg-gradient-to-r from-mayukha-gold to-mayukha-goldDark text-mayukha-dark font-bold text-sm shadow-gold-glow hover:brightness-110 transition flex items-center justify-center gap-2"
+                    >
+                      <Bike className="w-4 h-4" /> Order for Home Delivery
+                    </button>
+                    <Link
+                      href="/reserve"
+                      className="py-3 px-4 text-center rounded-xl bg-mayukha-card border border-mayukha-gold/40 text-mayukha-cream font-semibold text-sm hover:border-mayukha-gold transition flex items-center justify-center gap-1.5"
+                    >
+                      <Calendar className="w-4 h-4 text-mayukha-gold" /> Book Table
+                    </Link>
+                  </>
                 )}
               </div>
             </div>
           </div>
         </div>
       )}
+
+      {/* Home Delivery Order Modal */}
+      <OrderDeliveryModal
+        isOpen={!!orderDeliveryDish}
+        onClose={() => setOrderDeliveryDish(null)}
+        dish={orderDeliveryDish}
+      />
 
       <Footer />
     </div>

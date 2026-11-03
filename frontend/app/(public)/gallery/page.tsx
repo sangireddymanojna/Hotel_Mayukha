@@ -19,15 +19,57 @@ const galleryData: GalleryItem[] = [
     id: 'g-1',
     title: 'Aqua Theme Dining Hall',
     category: 'aqua',
-    image: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=80',
-    caption: 'Calming aquatic lighting and water features created for romantic and family dining.'
+    image: '/images/gallery/aqua-theme-dining.jpg',
+    caption: 'Calming aquatic lighting and living aquarium fish tank created for family and romantic dining.'
+  },
+  {
+    id: 'g-aqua-1',
+    title: 'Living Aquarium Tank View',
+    category: 'aqua',
+    image: '/images/gallery/aqua-aquarium-tank.jpg',
+    caption: 'Exotic black sharks and koi fish swimming in large living aquarium tank right beside dining tables.'
+  },
+  {
+    id: 'g-aqua-2',
+    title: 'Dining Beside Aquarium Tank',
+    category: 'aqua',
+    image: '/images/gallery/aqua-table-aquarium.jpg',
+    caption: 'Premium booth seating next to illuminated aquatic tank filled with Oscar fish.'
   },
   {
     id: 'g-2',
     title: 'Jungle Theme Family Section',
     category: 'jungle',
-    image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80',
-    caption: 'Immersive rainforest botanical aesthetic designed for kids, families, and celebrations.'
+    image: '/images/gallery/jungle-theme-dining.jpg',
+    caption: 'Immersive rainforest botanical tree aesthetic designed for kids, families, and celebrations.'
+  },
+  {
+    id: 'g-jungle-1',
+    title: 'Jungle Safari 3D Wall Art',
+    category: 'jungle',
+    image: '/images/gallery/jungle-safari-wall-art.jpg',
+    caption: 'Detailed 3D wildlife wall art featuring lions, giraffes, tigers and rainforest greenery.'
+  },
+  {
+    id: 'g-jungle-2',
+    title: 'Mayukha Jungle Theme Entrance',
+    category: 'jungle',
+    image: '/images/gallery/jungle-entrance-arch.jpg',
+    caption: 'Grand rustic tree trunk entrance arch welcoming guests into Mayukha Jungle Theme Dining.'
+  },
+  {
+    id: 'g-jungle-3',
+    title: 'Egg-Shell Pod Seating Booths',
+    category: 'jungle',
+    image: '/images/gallery/jungle-egg-pods.jpg',
+    caption: 'Signature white egg-shell shaped private dining booths surrounded by forest canopy decor.'
+  },
+  {
+    id: 'g-jungle-4',
+    title: 'Private Family Dining Hall',
+    category: 'jungle',
+    image: '/images/gallery/jungle-private-family-dining.jpg',
+    caption: 'Luxurious plush booth seating under leopard rainforest wall artwork designed for family dining.'
   },
   {
     id: 'g-3',
@@ -40,29 +82,22 @@ const galleryData: GalleryItem[] = [
     id: 'g-4',
     title: 'Authentic Hyderabadi Dum Biryani',
     category: 'food',
-    image: 'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=1200&q=80',
+    image: '/images/dishes/hyderabadi-chicken-dum-biryani.jpg',
     caption: 'Signature basmati rice dum biryani cooked with authentic spices and pure ghee.'
   },
   {
     id: 'g-5',
     title: 'Tandoori Tangdi Kebab Platter',
     category: 'food',
-    image: 'https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=1200&q=80',
+    image: '/images/dishes/tangdi-kebab.png',
     caption: 'Charcoal grilled chicken drumsticks marinated in cashew paste and hung curd.'
   },
   {
     id: 'g-6',
     title: 'Crispy Loose Prawns',
     category: 'food',
-    image: 'https://images.unsplash.com/photo-1565680018434-b513d5e5fd47?auto=format&fit=crop&w=1200&q=80',
+    image: '/images/dishes/crispy-loose-prawns.jpg',
     caption: 'Fresh ocean prawns tossed in curry leaves, green chillies, and garlic crunch.'
-  },
-  {
-    id: 'g-7',
-    title: 'Private Family Dining Booths',
-    category: 'jungle',
-    image: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1200&q=80',
-    caption: 'Cozy private dining booths nestled in jungle themed green foliage.'
   },
   {
     id: 'g-8',
@@ -82,7 +117,7 @@ export default function GalleryPage() {
     : galleryData.filter(item => item.category === activeTab);
 
   return (
-    <div className="min-h-screen flex flex-col bg-mayukha-dark">
+    <div className="min-h-screen flex flex-col bg-transparent">
       <Header />
 
       <section className="py-12 px-4 bg-gradient-to-b from-mayukha-surface to-mayukha-dark border-b border-mayukha-border/40 text-center">
@@ -126,13 +161,17 @@ export default function GalleryPage() {
             <div
               key={item.id}
               onClick={() => setLightboxItem(item)}
-              className="group relative h-64 rounded-2xl overflow-hidden glass-panel border border-mayukha-border/60 hover:border-mayukha-gold/50 cursor-pointer shadow-lg transition duration-500"
+              className="group relative h-64 rounded-2xl overflow-hidden radiant-card card-shine border border-mayukha-border/60 hover:border-mayukha-gold/50 cursor-pointer shadow-lg transition duration-500"
             >
               <Image
                 src={item.image}
                 alt={item.title}
                 fill
-                className="object-cover group-hover:scale-110 transition-transform duration-700"
+                className={`group-hover:scale-110 transition-transform duration-700 ${
+                  item.image.includes('jungle-entrance-arch')
+                    ? 'object-cover object-top'
+                    : 'object-cover object-center'
+                }`}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-mayukha-dark via-mayukha-dark/30 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
               
@@ -169,7 +208,11 @@ export default function GalleryPage() {
                 src={lightboxItem.image}
                 alt={lightboxItem.title}
                 fill
-                className="object-cover"
+                className={`object-cover ${
+                  lightboxItem.image.includes('jungle-entrance-arch')
+                    ? 'object-top'
+                    : 'object-center'
+                }`}
               />
             </div>
 

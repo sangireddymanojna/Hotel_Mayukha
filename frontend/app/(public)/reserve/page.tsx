@@ -78,7 +78,7 @@ export default function ReservePage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-mayukha-dark">
+    <div className="min-h-screen flex flex-col bg-transparent">
       <Header />
 
       {/* Header Banner */}

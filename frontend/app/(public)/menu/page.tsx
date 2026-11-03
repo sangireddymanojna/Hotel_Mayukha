@@ -267,7 +267,7 @@ export default function MenuPage() {
                     {isBanquetSlot ? (
                       <Link
                         href="/banquets"
-                        onClick={(e) => e.stopPropagation()}
+                        onClick={(e: React.MouseEvent) => e.stopPropagation()}
                         className="text-xs font-bold px-3 py-1.5 rounded-lg bg-mayukha-gold text-mayukha-dark hover:bg-mayukha-goldDark transition shadow"
                       >
                         Book Banquet Slot →
@@ -276,7 +276,7 @@ export default function MenuPage() {
                       <div className="flex items-center gap-2">
                         <button
                           type="button"
-                          onClick={(e) => {
+                          onClick={(e: React.MouseEvent) => {
                             e.stopPropagation();
                             setOrderDeliveryDish(item);
                           }}
